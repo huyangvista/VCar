@@ -44,6 +44,7 @@ public class StartContestDaoImpl extends MultiTableDao {
 				" WHERE child.state IS NULL) OR" +
 				" child.v_id IN (SELECT child.v_id " +
 				"FROM t_userpart WHERE child.state <>2) AND stopAuction!=1";
+		sql = "SELECT DISTINCT beginAuction,plusPri,bidSpri,vname,v_id,plateNo,stopAuction,bidTime,bidEndTime,bid_id FROM (SELECT beginAuction,plusPri,bidSpri,vname,getv.v_id,plateNo,stopAuction,bidTime,bidEndTime,bid_id,state FROM (SELECT v.v_id v_id , v.plateNo plateNo,b.stopAuction stopAuction , b.beginAuction beginAuction , b.bidSpri bidSpri ,b.plusPri plusPri , v.vname vname , b.bid_id bid_id , b.bidTime bidTime , b.bidEndTime bidEndTime  FROM t_vehicle v, t_bid b where v.v_id=b.v_id) getv LEFT JOIN t_userpart up ON getv.v_id=up.v_id ) child WHERE stopAuction!=1";
 		sql = this.getSql(sql, StartContest.class, page, condition, value);
 	/*	if(sql.indexOf("limit") >= 0) {
 			String frontSql = sql.substring(0 , sql.indexOf("limit") - 1);

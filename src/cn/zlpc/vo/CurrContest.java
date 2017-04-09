@@ -192,6 +192,17 @@ public class CurrContest {
 	private String u_tel;
 	private String vsState;
 
+	public String getU_pledge() {
+		return u_pledge;
+	}
+
+	public void setU_pledge(String u_pledge) {
+		this.u_pledge = u_pledge;
+	}
+
+	private String u_pledge;
+
+
 	public String getU_name() {
 		return u_name;
 	}

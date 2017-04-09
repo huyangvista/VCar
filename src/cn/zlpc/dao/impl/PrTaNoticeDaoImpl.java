@@ -32,7 +32,7 @@ public class PrTaNoticeDaoImpl extends MultiTableDao {
 			//sql = "select b.v_id,vname,bidTime,bidSpri,pledge,regTime,source,bidEndTime,plateNo from t_vehicle b left join t_bid a on a.v_id=b.v_id WHERE b.v_id NOT IN (SELECT v_id FROM t_userpart WHERE state=2)";
 			sql = "SELECT t_bid.v_id,vname,bidTime,bidSpri,pledge,regTime,source,bidEndTime,plateNo,v_source,stopAuction FROM t_vehicle LEFT JOIN t_bid ON t_vehicle.v_id=t_bid.v_id  ORDER BY bid_id DESC";
 		} else {
-			sql = "select b.v_id,vname,bidTime,bidSpri,pledge,regTime,source,bidEndTime,plateNo,v_source from t_bid a,t_vehicle b where a.v_id=b.v_id AND b.v_id NOT IN (SELECT v_id FROM t_userpart WHERE state=2)  order by bidTime desc";
+			sql = "select b.v_id,vname,bidTime,bidSpri,pledge,regTime,source,bidEndTime,plateNo,v_source from t_bid a,t_vehicle b where a.v_id=b.v_id AND a.stopAuction != 1 AND b.v_id NOT IN (SELECT v_id FROM t_userpart WHERE state=2)  order by bidTime desc";
 		}
 		PreparedStatement pstmt = DBUtil.getPstmt(conn, sql);
 		ResultSet rs = DBUtil.getRs(pstmt);

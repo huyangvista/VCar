@@ -14,6 +14,8 @@ import java.util.Properties;
  */
 public class DBUtil {
 
+
+
     public static MySql msq ;
 
     private static Connection conn = null;
@@ -75,6 +77,21 @@ public class DBUtil {
             msq.open(databaseUrl, databaseName, username, password);
         }
         return msq.getConn();
+    }
+
+    public static MySql getMsq() {
+        if (msq == null) {
+            msq = new MySql();
+        }
+        if (!msq.exe("show TABLES")) {
+            msq.open(databaseUrl, databaseName, username, password);
+        }
+        return msq;
+    }
+
+
+    public static void setMsq(MySql msq) {
+        DBUtil.msq = msq;
     }
 
     public static void close(ResultSet rs, PreparedStatement pst, Connection con) {

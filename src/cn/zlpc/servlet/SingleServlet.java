@@ -13,6 +13,7 @@ import cn.zlpc.dao.impl.AuctionDaoImpl;
 import cn.zlpc.exception.ErrorException;
 import cn.zlpc.po.User;
 import cn.zlpc.service.SingleService;
+import org.apache.poi.hssf.record.PageBreakRecord;
 
 /**
  * 用于针对由单个po组成统一提交的Servlet
@@ -71,34 +72,37 @@ public class SingleServlet extends HttpServlet
 		
 		if (operate[1].equals("add"))//如果是添加数据
 		{
-			String vsuid = ((User) request.getSession().getAttribute("user")).getU_id();
+			User user = (User) request.getSession().getAttribute("user");
+			if(user == null )
+			{
+                info.add("操作失败,请登录!");
+				request.setAttribute("info", info);
+                String dispatcherPath = "";
+                if (operate[1].equalsIgnoreCase("add"))
+                {
+                    dispatcherPath = "backstage/" + operate[0] + "/" + request.getParameter("operate").replace(".", "_") + ".jsp";
+                }
+                else
+                {
+                    dispatcherPath = "QueryServlet?view=" + operate[0];
+                }
+                request.getRequestDispatcher(dispatcherPath).forward(request, response);
+
+				return ;
+			}
+			String vsuid = user.getU_id();
 
 			//SELECT count(*) FROM `v_caruser` where u_id='q'
-			String vout = new AuctionDaoImpl().vexeSql("SELECT count(*) vcount FROM `v_caruser` where u_id='" + vsuid + "'", "vcount");
+			//String vout = new AuctionDaoImpl().vexeSql("SELECT count(*) vcount FROM `v_caruser` where u_id='" + vsuid + "'", "vcount");
 			//System.out.println("\\----" + vout);
-			vcount = Integer.parseInt(vout);
-
-			if (vcount >= 3)
-			{
-				info.add("操作失败,每个用户最多发布3辆二手车信息!");
-				request.setAttribute("info", info);
-
-			}
+			//vcount = Integer.parseInt(vout);
+//			if (vcount >= 3)
+//			{
+//				info.add("操作失败,每个用户最多发布3辆二手车信息!");
+//				request.setAttribute("info", info);
+//			}
 		}
 		String dispatcherPath = null;
-
-		/*String voutAdmin = new AuctionDaoImpl().vexeSql("SELECT count(*) vcount FROM `t_admin` where admin='" + vsuid + "'", "vcount");
-		int vcountAdmin = 0;
-		try
-		{
-			vcountAdmin = Integer.parseInt(voutAdmin);
-
-		}
-		catch (Exception e)
-		{
-			// TODO: handle exception
-		}*/
-
 		try
 		{
 			service.execute(operate[1]);
@@ -114,8 +118,6 @@ public class SingleServlet extends HttpServlet
 		
 		if ( operate[1].equals("add") && vcount < 3)//如果是添加数据
 		{
-			
-
 			if (operate[1].equalsIgnoreCase("add"))
 			{
 				dispatcherPath = "backstage/" + operate[0] + "/" + request.getParameter("operate").replace(".", "_") + ".jsp";
@@ -128,9 +130,7 @@ public class SingleServlet extends HttpServlet
 
 			//添加第二个表  用户表
 			String vsuid = ((User) request.getSession().getAttribute("user")).getU_id();
-
 			new AuctionDaoImpl().vtabCarUser(vsuid);
-
 			//System.out.println(request.getParameter("pledge") +".."+request.getParameter("regTime"));
 			//添加第三个 表  购物表
 			new AuctionDaoImpl().vtabShop();

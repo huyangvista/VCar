@@ -33,7 +33,7 @@ $(document).ready(
 							$(plus).focus();
 							flag = false;
 
-						} else if ($(bidTime).val() == '点我设置时间'
+						} /*else if ($(bidTime).val() == '点我设置时间'
 								|| $(bidEndTime).val() == '点我设置时间') {
 
 							alert("请设定时间！");
@@ -45,7 +45,7 @@ $(document).ready(
 							$(bidTime).focus();
 							flag=false;
 							
-						}/*else if(d.getTime() - date1.getTime() > 0){
+						}else if(d.getTime() - date1.getTime() > 0){
 							alert("开始时间不能比当前时间小！");	
 							$(bidTime).focus();
 							flag=false;

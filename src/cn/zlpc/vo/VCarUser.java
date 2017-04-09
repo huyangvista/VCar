@@ -5,7 +5,8 @@ public class VCarUser {
 	private String v_uid;
 	private String v_vid;
 	private String version;
-	
+	private String vstime;
+
 	public VCarUser() {
 		// TODO Auto-generated constructor stub
 	}
@@ -34,6 +35,16 @@ public class VCarUser {
 	public void setVersion(String version)
 	{
 		this.version = version;
+	}
+
+	public String getVstime()
+	{
+		return vstime;
+	}
+
+	public void setVstime(String vstime)
+	{
+		this.vstime = vstime;
 	}
 
 }

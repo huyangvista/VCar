@@ -41,8 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		"topfix" : "100"
 	};
 </script>
-<script type="text/javascript" charset="utf-8"
-	src="http://www.sunkf.net/codes/two/default/kf.js?v=1021"></script>
+<%--<script type="text/javascript" charset="utf-8"--%>
+	<%--src="http://www.sunkf.net/codes/two/default/kf.js?v=1021">--%>
+	<%----%>
+<%--</script>--%>
+
 <script>
 function checkForm5(){
 		if(document.topLoginForm.u_id.value == ""){

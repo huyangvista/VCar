@@ -20,6 +20,7 @@ import cn.zlpc.po.User;
 import cn.zlpc.util.ImageUtil;
 import cn.zlpc.vo.CurrContest;
 import cn.zlpc.vo.Page;
+import vdll.tools.DateTime;
 
 /**
  * 拍卖的Dao类
@@ -29,8 +30,112 @@ import cn.zlpc.vo.Page;
  */
 public class AuctionDaoImpl extends MultiTableDao
 {
-	private static Connection conn = DBUtil.getConnection();
-	private static Util util = new Util();
+	private  Connection conn = DBUtil.getConnection();
+	private  Util util = new Util();
+
+	/*
+ * Vive New 查询 完成订单
+ *
+ * @param u_id
+ * @param stateFlag
+ * @param condition
+ * @return
+ * @throws DBException
+ */
+	public List<CurrContest> vgetAuctionVehicle4Finish(String u_id, String stateFlag, String condition) throws DBException
+	{
+		String sql = "SELECT p.price,p.u_id,c.tel,c.v_id,c.plateNo,c.vname,c.regTime,c.source,c.v_source,b.bidTime,b.bidEndTime,b.bidSpri,b.plusPri,b.beginAuction,b.stopAuction FROM t_userpartfinish p,t_vehicle c,v_caruser u,t_bid b where p.v_id=c.v_id && c.v_id=u.v_id  && c.v_id=b.v_id && p.u_id='" + u_id + "'";
+
+		if (stateFlag == "-1")
+			;
+		if (stateFlag == "0")
+			sql = sql + " and (state=" + stateFlag + " or state is null)";
+		else if (stateFlag == "1")
+		{
+			sql = sql + " and state=" + stateFlag;
+		}
+		else
+		{
+			sql = sql + " and attention= 1";
+		}
+		List<CurrContest> auctionVehicleList = new ArrayList<CurrContest>();
+		try
+		{
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			// ResultSet rs0 = stm.executeQuery(sql0);
+			while (rs.next())
+			{
+				CurrContest aucVeh = new CurrContest();
+				aucVeh.setV_id(rs.getInt("v_id"));
+				aucVeh.setPlateNo(rs.getString("plateNo"));
+				aucVeh.setVname(rs.getString("vname"));
+				aucVeh.setRegTime(rs.getDate("regTime"));
+				aucVeh.setBidSpri(rs.getInt("bidSpri"));
+				aucVeh.setPlusPri(rs.getInt("plusPri"));
+				aucVeh.setBidTime(util.transferStringToDate(String.valueOf(rs.getObject("bidTime"))));
+				aucVeh.setBidEndTime(util.transferStringToDate(String.valueOf(rs.getObject("bidEndTime"))));
+				aucVeh.setBeginAuction(rs.getInt("beginAuction"));
+				aucVeh.setStopAuction(rs.getInt("stopAuction"));
+				aucVeh.setSource(rs.getString("source"));
+				aucVeh.setV_source(rs.getString("v_source"));
+				aucVeh.setAttCou(getAttCount(rs.getInt("v_id")));
+				aucVeh.setPeCou(getPeCount(rs.getInt("v_id")));
+
+				// 第二次查询
+				// rs.next();
+				// aucVeh.setU_name(rs0.getString("u_name"));
+				aucVeh.setU_tel(rs.getString("tel"));
+				aucVeh.setU_name(rs.getString("p.u_id"));
+
+				aucVeh.setU_pledge(rs.getString("p.price"));
+
+
+				// 查找用户  提供商
+				// String vstel = rs.getString("tel");
+				// String sql1 = String.format("SELECT u_id FROM
+				// t_user where tel='%s'", vstel);
+				String sql1 = String.format("SELECT u_id FROM v_caruser where v_id='%s'", rs.getInt("v_id"));
+				Statement stm1 = conn.createStatement();
+				ResultSet rs1 = stm1.executeQuery(sql1);
+				if (rs1.next()) ;
+				//aucVeh.setU_name(rs1.getString("u_id"));
+
+				// 查找用户  购买者
+				String sql2 = String.format("SELECT tel FROM t_user where u_id='%s';", rs.getString("p.u_id"));
+				Statement stm2 = conn.createStatement();
+				ResultSet rs2 = stm1.executeQuery(sql2);
+				if (rs2.next())
+				{
+					aucVeh.setU_tel(rs2.getString("tel"));
+					//System.out.println(rs2.getString("u_id"));
+				}
+
+				List<String> imageList = ImageUtil.getImage(ImageUtil.GET_PATH + rs.getString("v_id") + "\\", ImageUtil.SHOW_PATH + rs.getString("v_id") + "/");
+				if (imageList.size() != 0)
+				{
+					aucVeh.setImagePath(imageList.get(0));
+				}
+				else
+				{
+					aucVeh.setImagePath("img/nophoto.jpg");
+				}
+				// select t_user.u_name,t_user.tel,
+				// t_vehicle.v_id,t_vehicle.plateNo,vname,regTime,source,bidTime,bidEndTime,bidSpri,plusPri,beginAuction,stopAuction,v_source
+				// from t_user,v_caruser,t_userpart,t_bid where
+				// t_vehicle.v_id=t_bid.v_id and t_vehicle.v_id=t_userpart.v_id
+				// and u_id='q' and t_user.u_id = v_caruser.v_uid and
+				// v_vehicle.v_id = v_caruser.v_vid
+				auctionVehicleList.add(aucVeh);
+			}
+
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return auctionVehicleList;
+	}
 
 	/**
 	 * 以车牌号查询车辆信息；(即当前竞拍车辆)
@@ -158,8 +263,10 @@ public class AuctionDaoImpl extends MultiTableDao
 		List<CurrContest> auctionVehicleList = new ArrayList<CurrContest>();
 		try
 		{
-			Statement stm = conn.createStatement();
-			ResultSet rs = stm.executeQuery(sql);
+//			Statement stm = conn.createStatement();
+//			ResultSet rs = stm.executeQuery(sql);
+			ResultSet rs = DBUtil.getMsq().exeQ(sql);
+
 			// ResultSet rs0 = stm.executeQuery(sql0);
 			while (rs.next())
 			{
@@ -216,6 +323,8 @@ public class AuctionDaoImpl extends MultiTableDao
 				// v_vehicle.v_id = v_caruser.v_vid
 				auctionVehicleList.add(aucVeh);
 			}
+
+
 
 		}
 		catch (SQLException e)
@@ -330,7 +439,7 @@ public class AuctionDaoImpl extends MultiTableDao
 	 */
 	public List<CurrContest> vgetAuctionVehicle3(String u_id, String stateFlag, String condition) throws DBException
 	{
-		String sql = "SELECT p.u_id,c.tel,c.v_id,c.plateNo,c.vname,c.regTime,c.source,c.v_source,b.bidTime,b.bidEndTime,b.bidSpri,b.plusPri,b.beginAuction,b.stopAuction FROM sectraauction.t_userpart p,sectraauction.t_vehicle c,sectraauction.v_caruser u,t_bid b where p.v_id=c.v_id &&c.v_id=u.v_id  && c.v_id=b.v_id && u.u_id='" + u_id + "'";
+		String sql = "SELECT p.u_id,c.tel,c.v_id,c.plateNo,c.vname,c.regTime,c.source,c.v_source,b.bidTime,b.bidEndTime,b.bidSpri,b.plusPri,b.beginAuction,b.stopAuction FROM sectraauction.t_userpart p,sectraauction.t_vehicle c,sectraauction.v_caruser u,t_bid b where p.v_id=c.v_id &&c.v_id=u.v_id  && c.v_id=b.v_id && p.u_id='" + u_id + "'";
 
 		if (stateFlag == "0")
 			sql = sql + " and (state=" + stateFlag + " or state is null)";
@@ -939,10 +1048,11 @@ public class AuctionDaoImpl extends MultiTableDao
 				PeCou = rs.getInt("v_id");
 				pledge = rs.getString("pledge");
 			}
-			Date vd = new Date();
-			String vsdata = String.format("%s-%s-%s", vd.getYear(), vd.getMonth(), vd.getDay());
-			System.out.println(vsdata + "**" + pledge + "**" + PeCou);
-			sql = String.format("insert INTO sectraauction.t_bid (bidTime,bidSpri,v_id) values('%s','%s','%s')", vsdata, pledge, "" + PeCou);
+			DateTime dt = new DateTime();
+			String st = dt.format();
+			dt.addYear(1);
+			String et = dt.format();
+			sql = String.format("insert INTO sectraauction.t_bid (bidTime,bidEndTime,bidSpri,v_id) values('%s','%s','%s','%s')", st, et, pledge, "" + PeCou);
 			//System.err.println("----" + sql);
 			int vi = stm.executeUpdate(sql);
 

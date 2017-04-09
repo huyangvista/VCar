@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package cn.zlpc.util;
 
@@ -22,13 +22,13 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 
 /**
  * @author ASUS
- * 
+ *
  */
 public class VoConvertObj {
 
 	/**
 	 * 根据查询的值通过set方法将vo字节码转换成vo对象
-	 * 
+	 *
 	 * @param voClass
 	 *            传入的vo字节码
 	 * @param rs
@@ -56,7 +56,7 @@ public class VoConvertObj {
 								|| field.getName().equals("bidEndTime")) {
 							Date date = (Date) rs.getObject(field.getName());
 							try {
-							fieldValue = ConvertUtil.getFormalDate(date);
+								fieldValue = ConvertUtil.getFormalDate(date);
 							}catch (Exception e){
 
 							}
@@ -79,7 +79,7 @@ public class VoConvertObj {
 						} else if (field.getName().equals("allowCou")) {// 若字段名为购物车人数
 							sql = "select count(*) allowCou from t_userpart where v_id="
 									+ rs.getInt(5) + " and state = 1";
-							
+
 						} else if(field.getName().equals("applyCou")){
 							sql = "select count(*) applyCou from t_userpart where state in (0,1) and v_id="
 									+ rs.getInt(5);
@@ -101,7 +101,12 @@ public class VoConvertObj {
 //								new DBException("连接关闭异常!");
 //							}
 						}else {
-							value = rs.getInt(field.getName());
+							try {
+								value = rs.getInt(field.getName());
+
+							}catch (Exception e){
+
+							}
 						}
 						fieldValue = value;
 					}else {

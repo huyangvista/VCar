@@ -38,7 +38,7 @@
 		var re = /^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$/;
 		if (pno.search(re) == -1)
 		{
-			alert("输入的车牌号格式不正确,参考: 津A12345");
+			alert("输入的车牌号格式不正确,参考: 津A12D45");
 			return false;
 		}
 		if (f.vname.value == "") {
