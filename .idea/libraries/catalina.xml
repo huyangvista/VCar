@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="catalina">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/catalina.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tomcat-coyote.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

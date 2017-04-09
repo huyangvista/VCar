@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="VCar:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/VCar_war</output-path>
+    <root id="archive" name="VCar_war.war">
+      <element id="artifact" artifact-name="VCar:war exploded" />
+      <element id="javaee-facet-resources" facet="VCar/web/Web2" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="VCar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

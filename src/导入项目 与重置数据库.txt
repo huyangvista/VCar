@@ -1,0 +1,41 @@
+1.导入项目 打开 ->
+首先 删除原有项目：
+右键
+delete 
+delete project…… 打勾
+OK
+然后 导入新的项目：
+eclipse 
+file 
+import 
+General 
+existing projects into workspace
+next 
+browse 选择你的项目
+copy projects into workspace 打勾
+finish
+
+
+2.如果你没有数据库或数据库出现问题 
+
+在项目目录【elipse】 VCar/Java Resources/src/集合所有的数据库文件.sql 
+或文件目录  VCar\src\集合所有的数据库文件.sql
+留有数据库备份，此文件集成所有数据库文件(只运行本文件即可全部恢复)
+
+数据库->
+打开 Navicatpremium
+右键打开连接
+右键运行SQL文件
+选择SQL文件
+开始
+ 
+ 
+3.项目报错关闭杀毒软件与防火墙
+在项目目录【elipse】 VCar/Java Resources/src/db.properties
+或文件目录  VCar\src\db.properties
+设置数据库密码为 你自己电脑的数据库密码【可能是-> 123456】
+
+如下->
+DATABASENAME=sectraauction
+USERNAME=root
+PASSWORD=123
