@@ -20,7 +20,7 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lib" level="project" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 9.0.0.M17" level="application_server_libraries" />
     <orderEntry type="library" name="catalina" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.0.M10" level="application_server_libraries" />
   </component>
 </module>

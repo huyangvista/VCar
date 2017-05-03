@@ -3,10 +3,12 @@
     <output-path>$PROJECT_DIR$/out/artifacts/VCar_war</output-path>
     <root id="archive" name="VCar_war.war">
       <element id="artifact" artifact-name="VCar:war exploded" />
-      <element id="javaee-facet-resources" facet="VCar/web/Web2" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="VCar" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="catalina" />
         </element>
       </element>
     </root>

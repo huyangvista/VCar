@@ -12,7 +12,7 @@
 <head>
 	<base href="<%=basePath%>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>网上红酒销售与管理系统</title>
+	<title>二手车交易网</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 	<link href="css/index.css" rel="stylesheet" type="text/css" />
 	<link type="text/css" href="css/foot.css" rel="stylesheet" />
@@ -143,7 +143,7 @@
 						</table>
 					</form>
 				</div></td>
-			<td width="518"><font size="-1" color="#777777">成为网上红酒销售与管理系统的会员，您才能出售到您看中的商品.，若您还没有网上红酒销售与管理系统的账号，请先<a
+			<td width="518"><font size="-1" color="#777777">成为二手车交易网的会员，您才能出售到您看中的商品.，若您还没有二手车交易网的账号，请先<a
 					href="register"><b><font size="+1">注册</font> </b> </a>账号。 </font>
 			</td>
 		</tr>

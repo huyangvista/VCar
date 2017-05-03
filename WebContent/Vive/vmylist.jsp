@@ -264,6 +264,14 @@
 
 				<c:choose>
 				<c:when test="${requestScope.message != null}">
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 					<font size="5" color="red">${requestScope.message}</font>
 				</c:when>
 				<c:otherwise>

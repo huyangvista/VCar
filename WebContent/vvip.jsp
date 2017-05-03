@@ -136,6 +136,7 @@
 		<div style="margin-bottom: 5px; border-bottom: solid 1px #c2d5e3; margin-left: 180px; margin-right: 185px;">
 			<c:choose>
 				<c:when test="${requestScope.message != null}">
+					<br><br><br><br><br><br><br>
 					<font size="5" color="red">${requestScope.message}</font>
 				</c:when>
 				<c:otherwise>
