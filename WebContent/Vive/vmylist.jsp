@@ -402,7 +402,7 @@
 				</c:when>
 				<c:otherwise>
 
-					<font size="5" color="red">已完成订单订单:</font>
+					<font size="5" color="red">已完成订单:</font>
 					<table width="1000" border="0" cellpadding="0" cellspacing="0">
 
 						<tbody>
