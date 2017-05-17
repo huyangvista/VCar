@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.zlpc.util.SaveFile;
 import tool.mastery.core.CollectionFormUtil;
 import cn.zlpc.exception.ErrorException;
 import cn.zlpc.po.User;
 import cn.zlpc.service.UserService;
+import vdll.utils.UploadFile;
 
 /**
  * 用于针对会员中心所有的用户操作的Servlet
@@ -56,18 +58,17 @@ public class UserServlet extends HttpServlet {
 	 * @throws IOException
 	 *             if an error occurred
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		User user = null;
 		List<String> info = new ArrayList<String>();
 		String[] operate = request.getParameter("operate").split("\\.");
-		List<Object> beans = (List<Object>) CollectionFormUtil.parseRequest(
-				request, operate[0]);
+		List<Object> beans = (List<Object>) CollectionFormUtil.parseRequest(request, operate[0]);
 		UserService service = new UserService();
 		try {
 			user = service.execute(beans, operate[1]);
+			UploadFile.save(request,"userhead",user.getU_id() + ".png");
 			//System.out.println("u_id为" + user.getU_id());
 		} catch (Exception e) {
 			info.add(e.getMessage());

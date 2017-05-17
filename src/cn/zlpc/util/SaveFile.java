@@ -105,8 +105,6 @@ public class SaveFile {
 		if (folderName == null) {
 			new RuntimeException("存放上传文件的文件夹名称不存在，系统将采用默认的文件夹名称:upload");
 		}
-
-		
 	}
 
 

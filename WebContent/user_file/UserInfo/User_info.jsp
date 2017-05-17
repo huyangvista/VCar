@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="vdll.utils.UploadFile" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -110,18 +111,30 @@
 			<div id="umain-right" style="margin-bottom:5px;padding-top:2px;">
 				<img src="img/use_ico.gif">&nbsp;&nbsp;资料修改
 				<div id="dashed"></div>
-				<form method="post" name="creator"
-					action="UserServlet?operate=User.update"
-					onSubmit="return IsEmail();">
+
+				<form id="formPhone" method="post" name="creator"	enctype="multipart/form-data"	action="UploadHead" onSubmit="return IsEmail();">
+
+					<input type="file" id="ff"   name="ff" value=""> <br>
+					<input type="hidden" id="uid"  name="uid" value="${sessionScope.user.u_id }"> <br>
+
+					<input type="button" value="上传头像">
+				</form>
+
+				<form method="post" name="creator"		action="UserServlet?operate=User.update" onSubmit="return IsEmail();">
 					<table width="750" border="0" cellpadding="0" cellspacing="0">
 
 						<tbody>
 							<tr>
 								<td width="146"></td>
-								<td valign="bottom"><a href="javascript:void(0)"
-									rel="headimg" id="clickme" title=""> <img id="hdimg"
-										src="img/head0.gif"> <input type="hidden" id="edithead"
-										name="head" value="0"> <br>
+								<td valign="bottom"><a href="javascript:void(0)"		   rel="headimg" id="clickme" title="">
+
+
+									<img id="hdimg" src="img/head0.gif">
+
+									<img width="100" height="100" id="hdimg" src="userhead/${sessionScope.user.u_id }.png">
+
+
+									<input type="hidden" id="edithead"		name="head" value="0"> <br>
 										${sessionScope.user.u_id } </a>
 								</td>
 							</tr>
@@ -135,7 +148,7 @@
 							</tr>
 							<tr>
 								<td height="45"><div align="right">昵称：</div></td>
-								<td><input readonly="readonly" name="u_name" type="text"
+								<td><input  name="u_name" type="text"
 									id="gin2" maxlength="50" value="${list[0].u_name }"><font
 									color="red">*不可修改</font></td>
 							</tr>
@@ -165,18 +178,24 @@
 
 							<tr>
 								<td height="45"></td>
-								<td>*无法修改,确实要修改请与客服联系</td>
+								<td>修改后点击提交</td>
 							</tr>
 							<tr>
 								<td height="45"></td>
-								<td><input type="submit" name="Submit" value="提交"
-									class="button2"></td>
+								<td><input type="submit" name="Submit" value="提交"	   onclick="uploadPhone()"				class="button2"></td>
 							</tr>
 						</tbody>
 					</table>
 				</form>
 			</div>
 		</div>
+
+		<script>
+			function uploadPhone() {
+
+				document.getElementById("formPhone").submit();
+			}
+		</script>
 
 
 		<!-- 尾部开始 -->
