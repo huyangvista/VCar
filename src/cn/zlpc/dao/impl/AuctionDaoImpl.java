@@ -439,7 +439,7 @@ public class AuctionDaoImpl extends MultiTableDao
 	 */
 	public List<CurrContest> vgetAuctionVehicle3(String u_id, String stateFlag, String condition) throws DBException
 	{
-		String sql = "SELECT p.u_id,c.tel,c.v_id,c.plateNo,c.vname,c.regTime,c.source,c.v_source,b.bidTime,b.bidEndTime,b.bidSpri,b.plusPri,b.beginAuction,b.stopAuction FROM sectraauction.t_userpart p,sectraauction.t_vehicle c,sectraauction.v_caruser u,t_bid b where p.v_id=c.v_id &&c.v_id=u.v_id  && c.v_id=b.v_id && p.u_id='" + u_id + "'";
+		String sql = "SELECT p.u_id,c.tel,c.v_id,c.plateNo,c.vname,c.regTime,c.source,c.v_source,b.bidTime,b.bidEndTime,b.bidSpri,b.plusPri,b.beginAuction,b.stopAuction FROM sectraauction.t_userpart p,sectraauction.t_vehicle c,sectraauction.v_caruser u,t_bid b where p.v_id=c.v_id &&c.v_id=u.v_id  && c.v_id=b.v_id && u.u_id='" + u_id + "'";
 
 		if (stateFlag == "0")
 			sql = sql + " and (state=" + stateFlag + " or state is null)";

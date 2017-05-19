@@ -128,7 +128,9 @@
 				</div>
 			</div>
 			<div id="detail" style="margin-bottom: 5px;">
-				<div id="redtag" style="margin-bottom: 2px;" align="left">以下损失说明只作为购买方参考，如有部分出入请谅解，本公司建议购买方实地看车。由于事故车辆目前无法启动，无法了解正确的公里数；且该车所有商业保险已终止。</div>
+				<div id="redtag" style="margin-bottom: 2px;" align="left">
+					付款方式：货到付款 <br>
+					以下损失说明只作为购买方参考，如有部分出入请谅解，本公司建议购买方实地看车。由于目前无法启动，无法了解正确的公里数；且该车所有商业保险已终止。</div>
 
 				<table bgcolor="#cccccc" border="0" width="310" cellpadding="0" cellspacing="1">
 					<tbody>

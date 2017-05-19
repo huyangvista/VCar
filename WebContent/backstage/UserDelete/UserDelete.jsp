@@ -52,7 +52,7 @@
 								id="select" onChange="select()">
 									<option value="u_id">按会员账号搜索</option>
 									<option value="tname">按会员名搜索</option>
-									<option value="r_rank">按会员级别搜索</option>
+									<%--<option value="r_rank">按会员级别搜索</option>--%>
 							</select> <input type="text" placeholder="Search" id="queryInput" name="u_id">
 								<a href="javascript:start('UserDelete')" role="button"><i
 									class="icon-search">搜索</i> </a> </span>

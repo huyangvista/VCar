@@ -209,7 +209,7 @@
 
 			<!-- 账户管理 -->
 			<!-- 系统维护 -->
-			<li><a> <i class="icon-list-alt"></i> <span
+			<%--<li><a> <i class="icon-list-alt"></i> <span
 					class="menu-text">系统维护</span> </a>
 				<ul class="nav nav-list" style="display:none" id="weihu">
 					<li>
@@ -235,7 +235,7 @@
 					</li>
 				</ul>
 			</li>
-			<!-- 系统维护 -->
+			<!-- 系统维护 -->--%>
 			<li><a href="admin_login.jsp" target="_top"> <i
 					class="icon-off"></i> <span class="menu-text">安全退出</span> </a>
 			</li>

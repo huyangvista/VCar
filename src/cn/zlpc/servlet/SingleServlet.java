@@ -139,6 +139,11 @@ public class SingleServlet extends HttpServlet
 		if (operate[1].equalsIgnoreCase("add"))
 		{
 			dispatcherPath = "backstage/" + operate[0] + "/" + request.getParameter("operate").replace(".", "_") + ".jsp";
+			String show = request.getParameter("show");
+			if(show != null ){
+				dispatcherPath = show;
+			}
+
 		}
 		else
 		{

@@ -81,7 +81,7 @@
 		<div class="page-content">
 			<div class="page-header">
 
-				<form id="vehicleAdd" action="SingleServlet?operate=Vehicle.add" method="post" onSubmit="return validate(this)" enctype="multipart/form-data">
+				<form id="vehicleAdd" action="SingleServlet?operate=Vehicle.add&show=vvip.jsp" method="post" onSubmit="return validate(this)" enctype="multipart/form-data">
 					<table class="table table-hover" border="0">
 						<tbody>
 							<tr>
@@ -194,6 +194,7 @@
 
 							<tr>
 								<td>
+									<input type="hidden"  name="show"  value="vvip.jsp"/>
 									<button class="btn btn-large btn-primary" type="submit">确定</button>
 								</td>
 								<td><button class="btn btn-large btn-primary" type="reset">取消</button></td>

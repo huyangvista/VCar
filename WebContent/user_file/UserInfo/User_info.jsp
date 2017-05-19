@@ -117,7 +117,7 @@
 					<input type="file" id="ff"   name="ff" value=""> <br>
 					<input type="hidden" id="uid"  name="uid" value="${sessionScope.user.u_id }"> <br>
 
-					<input type="button" value="上传头像">
+					<input type="submit" value="上传头像">
 				</form>
 
 				<form method="post" name="creator"		action="UserServlet?operate=User.update" onSubmit="return IsEmail();">
